@@ -31,7 +31,6 @@ Other = React.createClass({
         // Now we search through all users to get the profile
         // of the user we want.
         let otherUser = _.findWhere(allUsers, { username: otherUsername[0] })
-        // We need to
         let chatRoute = "/other/" + message._id
         return (
           <ReactRouter.Link className="item item-avatar" key={message} to={chatRoute} query={{ chatId: message._id }}>
@@ -63,9 +62,23 @@ ChatSubheader = React.createClass({
 })
 
 Chat = React.createClass({
+  mixins: [ReactMeteorData],
+  getMeteorData() {
+    let chat = MessagesData.find(this.props.params.chatId)
+    return {
+      chat
+    }
+  },
   render() {
     return (
-      <h1>chat</h1>
+      <div className="bar bar-footer item-input-inset">
+        <label className="item-input-wrapper">
+          <input type="text" placeholder="" />
+        </label>
+        <button className="button button-small">
+          Send
+        </button>
+      </div>
     )
   }
 })
