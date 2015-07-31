@@ -64,20 +64,41 @@ ChatSubheader = React.createClass({
 Chat = React.createClass({
   mixins: [ReactMeteorData],
   getMeteorData() {
-    let chat = MessagesData.find(this.props.params.chatId)
+    if (Meteor.loggingIn()) {
+      var currentUser = null
+    } else if (Meteor.user()){
+      var currentUser = Meteor.user()
+    }
+    let chat = MessagesData.findOne(this.props.params.chatId)
     return {
-      chat
+      chat,
+      currentUser
     }
   },
   render() {
+    console.log(this.data.chat);
+    // We want to create list for the last 10 messages between these two parties.
+    let list = null
+    // this.data.chat.messages.map((message) => {
+    //   return (
+    //     <div className="item" key={message}>
+    //
+    //     </div>
+    //   )
+    // })
     return (
-      <div className="bar bar-footer item-input-inset">
-        <label className="item-input-wrapper">
-          <input type="text" placeholder="" />
-        </label>
-        <button className="button button-small">
-          Send
-        </button>
+      <div>
+        <div className="list">
+          {list}
+        </div>
+        <div className="bar bar-footer item-input-inset">
+          <label className="item-input-wrapper">
+            <input type="text" placeholder="" />
+          </label>
+          <button className="button button-small button-clear">
+            Send
+          </button>
+        </div>
       </div>
     )
   }
