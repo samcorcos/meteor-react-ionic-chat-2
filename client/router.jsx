@@ -2,6 +2,7 @@ const routes = (
   <ReactRouter.Route name="root" handler={AppBody}>
     <ReactRouter.Route name="home" path="/" handler={Home} />
     <ReactRouter.Route name="other" path="/other" handler={Other} />
+    <ReactRouter.Route name="chat" path="/other/:chatId" handler={Chat} />
     <ReactRouter.Route name="settings" path="/settings" handler={Settings} />
     <ReactRouter.DefaultRoute handler={AppLoading} />
     <ReactRouter.NotFoundRoute handler={AppNotFound} />

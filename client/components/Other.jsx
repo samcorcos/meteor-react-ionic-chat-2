@@ -31,12 +31,14 @@ Other = React.createClass({
         // Now we search through all users to get the profile
         // of the user we want.
         let otherUser = _.findWhere(allUsers, { username: otherUsername[0] })
+        // We need to
+        let chatRoute = "/other/" + message._id
         return (
-          <a className="item item-avatar" key={message}>
+          <ReactRouter.Link className="item item-avatar" key={message} to={chatRoute} query={{ chatId: message._id }}>
             <img src={otherUser.profile.image} />
             <h2>{otherUser.username}</h2>
             <p>{message.messages[0].content}</p>
-          </a>
+          </ReactRouter.Link>
         )
       })
     }
@@ -56,6 +58,14 @@ ChatSubheader = React.createClass({
         <h2 className="title"></h2>
         <button className="button button-icon icon ion-compose"></button>
       </div>
+    )
+  }
+})
+
+Chat = React.createClass({
+  render() {
+    return (
+      <h1>chat</h1>
     )
   }
 })
